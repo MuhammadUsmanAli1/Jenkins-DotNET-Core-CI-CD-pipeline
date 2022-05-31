@@ -1,0 +1,68 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Practice\\DotnetCore\\Jenkins-.NET-Core-CI-CD-pipeline-dev\\Jenkins-.NET-Core-CI-CD-pipeline-dev\\WebApplication\\WebApplication.csproj": {}
+  },
+  "projects": {
+    "E:\\Practice\\DotnetCore\\Jenkins-.NET-Core-CI-CD-pipeline-dev\\Jenkins-.NET-Core-CI-CD-pipeline-dev\\WebApplication\\WebApplication.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Practice\\DotnetCore\\Jenkins-.NET-Core-CI-CD-pipeline-dev\\Jenkins-.NET-Core-CI-CD-pipeline-dev\\WebApplication\\WebApplication.csproj",
+        "projectName": "WebApplication",
+        "projectPath": "E:\\Practice\\DotnetCore\\Jenkins-.NET-Core-CI-CD-pipeline-dev\\Jenkins-.NET-Core-CI-CD-pipeline-dev\\WebApplication\\WebApplication.csproj",
+        "packagesPath": "C:\\Users\\sony\\.nuget\\packages\\",
+        "outputPath": "E:\\Practice\\DotnetCore\\Jenkins-.NET-Core-CI-CD-pipeline-dev\\Jenkins-.NET-Core-CI-CD-pipeline-dev\\WebApplication\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\sony\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
