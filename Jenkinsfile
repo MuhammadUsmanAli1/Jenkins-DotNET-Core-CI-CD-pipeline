@@ -3,36 +3,39 @@ pipeline {
      triggers {
         githubPush()
       }
-        stages {
+    stages {
         stage('Restore packages'){
            steps{
-               sh 'dotnet restore WebApplication.sln'
+               bat 'dotnet restore JenkinsDotNetCoreCICDpipelineApp.sln'
             }
          }        
-
         stage('Clean'){
            steps{
-               sh 'dotnet clean WebApplication.sln --configuration Release'
+               bat 'dotnet clean JenkinsDotNetCoreCICDpipelineApp.sln --configuration Release'
             }
          }
         stage('Build'){
            steps{
-               sh 'dotnet build WebApplication.sln --configuration Release --no-restore'
+               bat 'dotnet build JenkinsDotNetCoreCICDpipelineApp.sln --configuration Release --no-restore'
             }
          }
-       
+        stage('Test: Unit Test'){
+           steps {
+                bat 'dotnet test XUnitTestProject/XUnitTestProject.csproj --configuration Release --no-restore'
+             }
+          }
         stage('Publish'){
              steps{
-               sh 'dotnet publish WebApplication/WebApplication.csproj --configuration Release --no-restore'
+               bat 'dotnet publish WebApplication/JenkinsDotNetCoreCICDpipeline.csproj --configuration Release --no-restore'
              }
         }
         stage('Deploy'){
              steps{
-               sh '''for pid in $(lsof -t -i:9090); do
-                       kill -9 $pid
-               done'''
-               sh 'cd WebApplication/bin/Release/netcoreapp3.1/publish/'
-               sh 'nohup dotnet WebApplication.dll --urls="http://40.117.138.143/:9090" --ip="40.117.138.143" --port=9090 --no-restore > /dev/null 2>&1 &'
+               //bat '''for pid in $(lsof -t -i:9090); do
+                //       kill -9 $pid
+              // done'''
+               bat 'cd WebApplication/bin/Release/netcoreapp3.1/publish'
+               bat 'dotnet publish JenkinsDotNetCoreCICDpipeline.dll --urls="http://20.232.129.22:9090" --ip="20.232.129.229" --port=9090 --no-restore > /dev/null 2>&1 &'
              }
         }        
     }
