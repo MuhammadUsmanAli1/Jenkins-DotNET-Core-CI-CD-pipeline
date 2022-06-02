@@ -16,7 +16,7 @@ pipeline {
          }
         stage('Build'){
            steps{
-               bat 'MSBuild /t:restore JenkinsDotNetCoreCICDpipelineApp.sln --configuration Release --no-restore'
+               bat 'dotnet restore JenkinsDotNetCoreCICDpipelineApp.sln --configuration Release --no-restore'
             }
          }
         stage('Test: Unit Test'){
