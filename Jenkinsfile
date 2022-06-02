@@ -9,11 +9,7 @@ pipeline {
                bat 'dotnet restore JenkinsDotNetCoreCICDpipelineApp.sln'
             }
          }        
-        stage('Clean'){
-           steps{
-               bat 'dotnet clean JenkinsDotNetCoreCICDpipelineApp.sln --configuration Release'
-            }
-         }
+       
         stage('Build'){
            steps{
                bat 'dotnet build JenkinsDotNetCoreCICDpipelineApp.sln --configuration Release --no-restore'
