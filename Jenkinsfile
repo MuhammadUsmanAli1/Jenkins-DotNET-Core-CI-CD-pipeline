@@ -9,7 +9,11 @@ pipeline {
                bat 'dotnet restore JenkinsDotNetCoreCICDpipelineApp.sln'
             }
          }        
-       
+        stage('Clean'){
+           steps{
+               bat 'dotnet clean JenkinsDotNetCoreCICDpipelineApp.sln --configuration Release'
+            }
+         }
         stage('Build'){
            steps{
                bat 'dotnet build JenkinsDotNetCoreCICDpipelineApp.sln --configuration Release --no-restore'
@@ -31,7 +35,7 @@ pipeline {
                 //       kill -9 $pid
               // done'''
                bat 'cd WebApplication/bin/Release/netcoreapp3.1/publish'
-               bat 'nohup dotnet JenkinsDotNetCoreCICDpipeline.dll --urls="http://20.232.129.22:9090" --ip="20.232.129.229" --port=9090 --no-restore > /dev/null 2>&1 &'
+               bat 'dotnet publish JenkinsDotNetCoreCICDpipeline.dll --urls="http://20.232.129.22:9090" --ip="20.232.129.229" --port=9090 --no-restore > /dev/null 2>&1 &'
              }
         }        
     }
