@@ -16,7 +16,7 @@ pipeline {
          }
         stage('Build'){
            steps{
-               bat 'dotnet restore JenkinsDotNetCoreCICDpipelineApp.sln --configuration Release --no-restore'
+               bat 'dotnet build JenkinsDotNetCoreCICDpipelineApp.sln --configuration Release --no-restore'
             }
          }
         stage('Test: Unit Test'){
@@ -29,14 +29,33 @@ pipeline {
                bat 'dotnet publish WebApplication/JenkinsDotNetCoreCICDpipeline.csproj --configuration Release --no-restore'
              }
         }
-        stage('Deploy'){
-             steps{
-               //bat '''for pid in $(lsof -t -i:9090); do
-                //       kill -9 $pid
-              // done'''
-               bat 'cd WebApplication/bin/Release/netcoreapp3.1/publish'
-               bat 'dotnet publish JenkinsDotNetCoreCICDpipeline.dll --urls="http://20.232.129.22:9090" --ip="20.232.129.229" --port=9090 --no-restore > /dev/null 2>&1 &'
-             }
+        
+        stage('make zip') {
+            steps {
+                echo "working"
+               //bat 'zip -r myzip.zip *'
+            }
+        }
+         stage('Copy to s3') {
+            steps {
+                 
+                bat  "echo Copy to S3"
+                bat 'aws s3 cp myzip.zip s3://jenkins-backup-files-sa'
+            }
+        }
+          stage('Create Application') {
+            steps {
+                  echo "working"
+                //bat  "echo Create Application"
+                //bat 'aws elasticbeanstalk create-application-version --application-name php  --version-label jenkins-pipeline-26 --source-bundle S3Bucket=jenkins-backup-files-sa,S3Key=myzip.zip'
+            }
+        }
+          stage('Update to Beanstalk') {
+            steps {
+                  echo "working"
+                //bat  "echo Update to Beanstalk"
+                //bat 'aws elasticbeanstalk update-environment --application-name php --environment-name Php-env --version-label jenkins-pipeline-26'
+            }
         }        
-    }
-}
+        
+    }}
