@@ -40,6 +40,7 @@ pipeline {
             steps {
                  
                 bat  "echo Copy to S3"
+                bat "cd \WebApplication\bin\Release\netcoreapp3.1\publish
                 bat 'tar -a -c -f compressed.zip * '
                 //bat 'aws s3 cp myzip.zip s3://jenkins-backup-files-sa'
             }
