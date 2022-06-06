@@ -40,15 +40,8 @@ pipeline {
             steps {
                  
                 bat  "echo Copy to S3"
-                bat '''
-                        echo "Buils starting..."'
-                        cd '\ivatech2\WebApplication\bin\Release\netcoreapp3.1'
-              
-                    '''                
-                //bat 'dir C:\ProgramData\Jenkins\.jenkins\workspace\ivatech2\WebApplication\bin\Release\netcoreapp3.1'
-                
                 bat 'tar -a -c -f compressed.zip * '
-                bat 'aws s3 cp myzip.zip s3://jenkins-backup-files-sa'
+                //bat 'aws s3 cp myzip.zip s3://jenkins-backup-files-sa'
             }
         }
           stage('Create Application') {
