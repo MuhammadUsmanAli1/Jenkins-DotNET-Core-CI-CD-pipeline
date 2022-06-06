@@ -33,8 +33,8 @@ pipeline {
         stage('make zip') {
             steps {
                 echo "working"
-                 'cd \WebApplication\bin\Release\netcoreapp3.1\publish}'
-                bat 'tar -a -c -f compressed.zip * '
+                 //'cd \WebApplication\bin\Release\netcoreapp3.1\publish}'
+                bat 'tar -a -c -f myzip.zip * '
                //bat 'zip -r myzip.zip *'
             }
         }
@@ -42,7 +42,6 @@ pipeline {
             steps {
                  
                 bat  "echo Copy to S3"
-             
                 //bat 'aws s3 cp myzip.zip s3://jenkins-backup-files-sa'
             }
         }
