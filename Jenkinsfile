@@ -33,7 +33,7 @@ pipeline {
         stage('make zip') {
             steps {
                 echo "working"
-                 bat 'cd WebApplication\bin\Release\netcoreapp3.1\publish}'
+                 bat cd '\WebApplication\bin\Release\netcoreapp3.1\publish}'
                 bat 'tar -a -c -f compressed.zip * '
                //bat 'zip -r myzip.zip *'
             }
