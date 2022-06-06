@@ -42,8 +42,8 @@ pipeline {
                 bat  "echo Copy to S3"
                 bat '''
                         echo "Buils starting..."'
-                        CD \ivatech2\WebApplication\bin\Release\netcoreapp3.1
-                        cd
+                        cd '\ivatech2\WebApplication\bin\Release\netcoreapp3.1'
+              
                     '''                
                 //bat 'dir C:\ProgramData\Jenkins\.jenkins\workspace\ivatech2\WebApplication\bin\Release\netcoreapp3.1'
                 
