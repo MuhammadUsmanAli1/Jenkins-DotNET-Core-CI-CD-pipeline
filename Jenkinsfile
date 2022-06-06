@@ -34,14 +34,17 @@ pipeline {
             steps {
                 echo "working"
                  //'cd \WebApplication\bin\Release\netcoreapp3.1\publish}'
-                bat 'tar -a -c -f compressed.zip * '
+                bat 'tar -a -c -f compressed.zip *'
                //bat 'zip -r myzip.zip *'
             }
         }
          stage('Copy to s3') {
-            steps {
-                 
-                bat  "echo Copy to S3"
+       steps {
+                  withAWS(region:'us-west-2',credentials:'AWS-Credentials') {
+                  sh 'echo "Uploading content with AWS creds"'
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'compressed.zip', bucket:'smshandler')
+                  }
+                
                 //bat 'aws s3 cp myzip.zip s3://jenkins-backup-files-sa'
             }
         }
