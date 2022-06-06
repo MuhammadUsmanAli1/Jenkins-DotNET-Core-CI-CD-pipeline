@@ -44,7 +44,7 @@ pipeline {
                   sh 'echo "Uploading content with AWS creds"'
                      //bat 'aws s3 cp compressed.zip s3://aws:s3:::smshandler
                   }
-                  
+       }
           stage('Create Application') {
             steps {
                   echo "working"
