@@ -40,7 +40,7 @@ pipeline {
         }
          stage('Copy to s3') {
        steps {
-                  withAWS(region:'us-west-2',credentials:'AWS-Credentials') {
+                  withAWS(region:'us-west-2',credentials:'AWS-Credentials')
                   sh 'echo "Uploading content with AWS creds"'
                      //bat 'aws s3 cp compressed.zip s3://aws:s3:::smshandler
                   }
