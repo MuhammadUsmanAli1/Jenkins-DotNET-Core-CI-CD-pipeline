@@ -39,7 +39,7 @@ pipeline {
             }
         }
          stage('Copy to s3') {
-        s3Upload(file:'test.zip', bucket:'SmsHandler', path:./')
+        s3Upload(file:'test.zip', bucket:'SmsHandler', path:'')
        }
           stage('Create Application') {
             steps {
