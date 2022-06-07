@@ -38,15 +38,17 @@ pipeline {
                 }
             }
         }
-         stage('Copy to s3') {
-         steps {
-                echo "working"
-               script {
-             
-             s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 's3://arn:aws:s3:us-east-1:603834972736:accesspoint/jenkins', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-iso-east-1', showDirectlyInBrowser: false, sourceFile: 'test.zip', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'smshandler', userMetadata: []
-               }
-         }
-         }
+   
+            stage('Copy to s3') {
+                    try {
+            withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+             bat 'aws s3 ls'
+             bat 'aws s3 cp test.zip s3://smshadler'
+            } }
+            catch(err){
+            bat 'echo error'
+            }
+
           stage('Create Application') {
             steps {
                   echo "working"
