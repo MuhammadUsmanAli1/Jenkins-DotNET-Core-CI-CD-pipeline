@@ -39,8 +39,9 @@ pipeline {
             }
         }
          stage('Copy to s3') {
-        s3Upload(file:'test.zip', bucket:'SmsHandler', path:'')
-       }
+        bat 's3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 's3://arn:aws:s3:us-east-1:603834972736:accesspoint/jenkins', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'us-iso-east-1', showDirectlyInBrowser: false, sourceFile: '$(Workspace)\\test.zip', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'smshandler', userMetadata: []'
+         
+         }
           stage('Create Application') {
             steps {
                   echo "working"
