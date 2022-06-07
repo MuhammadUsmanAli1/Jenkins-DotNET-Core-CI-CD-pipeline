@@ -33,8 +33,11 @@ pipeline {
         stage('make zip') {
             steps {
                 echo "working"
-                zip zipFile: 'Test.zip', dir:'WebApplication/bin/Release/netcoreapp3.1/publish
-                bat 'echo "END - ZIP"
+               script {
+                    zip dir: 'WebApplication/bin/Release/netcoreapp3.1/publish', glob: '', zipFile: 'testz.zip'
+                }
+                //zip zipFile: 'Test.zip', dir:'WebApplication/bin/Release/netcoreapp3.1/publish
+                //bat 'echo "END - ZIP"
                 //bat 'tar -a -c WebApplication/bin/Release/netcoreapp3.1/publish -f publish.zip *'
                //bat 'zip -r myzip.zip *'
             }
