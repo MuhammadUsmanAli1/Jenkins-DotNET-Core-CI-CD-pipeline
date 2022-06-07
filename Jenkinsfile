@@ -47,6 +47,7 @@ pipeline {
                   withAWS(region:'us-west-2',credentials:'AWS-Credentials')
                   sh 'echo "Uploading content with AWS creds"'
                      //bat 'aws s3 cp compressed.zip s3://aws:s3:::smshandler
+           s3CopyArtifact buildSelector: lastSuccessful(), excludeFilter: '', filter: 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\ivatech2/test.zip', flatten: false, optional: false, projectName: 'ivatech2', target: 's3://arn:aws:s3:us-east-1:603834972736:accesspoint/jenkins'
                   }
        }
           stage('Create Application') {
