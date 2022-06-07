@@ -34,7 +34,7 @@ pipeline {
             steps {
                 echo "working"
                 
-                bat 'tar -a WebApplication/bin/Release/netcoreapp3.1/publish -f publish.zip *'
+                bat 'tar -a -c WebApplication/bin/Release/netcoreapp3.1/publish -f publish.zip *'
                //bat 'zip -r myzip.zip *'
             }
         }
