@@ -41,15 +41,9 @@ pipeline {
    
             stage('Copy to s3') {
   try {
-     
-      withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'deploytos3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        bat 'aws s3 ls'
- 	bat 'aws s3 cp test.zip s3://smshadler'
-         }
-      } catch(err) {
-         sh "echo error in sending artifacts to s3"
+     s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: '', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: '*/*', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'smshandler', userMetadata: []
       }
-
+            }
           stage('Create Application') {
             steps {
                   echo "working"
