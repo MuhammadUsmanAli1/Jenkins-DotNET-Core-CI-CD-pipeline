@@ -39,12 +39,21 @@ pipeline {
             }
         }
          stage('Copy to s3') {
-       steps {
-                  withAWS(region:'us-west-2',credentials:'AWS-Credentials')
-                  sh 'echo "Uploading content with AWS creds"'
-                   bat 'aws s3 cp test.zip s3://arn:aws:s3:us-east-1:603834972736:accesspoint/jenkins'
-      
-                  }
+       steps step([
+        $class: 'S3BucketPublisher',
+        entries: [[
+            sourceFile: 'test.zip',
+            bucket: 'SmsHandler',
+            selectedRegion: 'eu-west-1',
+            noUploadOnFailure: true,
+            managedArtifacts: true,
+            flatten: true,
+            showDirectlyInBrowser: true,
+            keepForever: true,
+        ]],
+        profileName: '',
+        dontWaitForConcurrentBuildCompletion: false, 
+    ])
        }
           stage('Create Application') {
             steps {
