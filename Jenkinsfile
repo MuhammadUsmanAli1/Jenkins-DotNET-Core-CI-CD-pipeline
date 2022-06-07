@@ -39,15 +39,16 @@ pipeline {
             }
         }
    
-            stage('Copy to s3') {
+            stage ('Copy to s3') {
                     try {
             withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
-             bat 'aws s3 ls'
-             bat 'aws s3 cp test.zip s3://smshadler'
-            } }
+            bat 'aws s3 ls'
+            bat 'aws s3 cp test.zip s3://smshadler'
+            }
+                    }
             catch(err){
             bat 'echo error'
-            }
+           }
 
           stage('Create Application') {
             steps {
