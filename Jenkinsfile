@@ -42,6 +42,8 @@ pipeline {
             stage ('Copy to s3') {
                     try {
             withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+    // some block
+
             bat 'aws s3 ls'
             bat 'aws s3 cp test.zip s3://smshadler'
             }
