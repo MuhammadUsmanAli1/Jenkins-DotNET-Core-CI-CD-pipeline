@@ -34,7 +34,7 @@ pipeline {
             steps {
                 echo "working"
                script {
-                    zip dir: 'WebApplication/bin/Release/netcoreapp3.1/publish', glob: '', zipFile: 'testz.zip'
+                    zip dir: 'WebApplication/bin/Release/netcoreapp3.1/publish', glob: '', zipFile: 'test.zip'
                 }
                 //zip zipFile: 'Test.zip', dir:'WebApplication/bin/Release/netcoreapp3.1/publish
                 //bat 'echo "END - ZIP"
