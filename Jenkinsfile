@@ -39,21 +39,7 @@ pipeline {
             }
         }
          stage('Copy to s3') {
-       steps step([
-        $class: 'S3BucketPublisher',
-        entries: [[
-            sourceFile: 'test.zip',
-            bucket: 'SmsHandler',
-            selectedRegion: 'eu-west-1',
-            noUploadOnFailure: true,
-            managedArtifacts: true,
-            flatten: true,
-            showDirectlyInBrowser: true,
-            keepForever: true,
-        ]],
-        profileName: '',
-        dontWaitForConcurrentBuildCompletion: false, 
-    ])
+        s3Upload(file:'test.zip', bucket:'SmsHandler', path:./')
        }
           stage('Create Application') {
             steps {
