@@ -39,7 +39,7 @@ pipeline {
              }
         }
         
-        stage('make zip') {
+        stage('make zip'){
             steps {
                 echo "working"
                script {
@@ -49,7 +49,7 @@ pipeline {
         }
    
         stage('Copy to s3'){
-        Steps {
+        steps {
             bat 'echo "all good'
             archiveArtifacts 'test.zip'
             bat 'aws configure set region us-east-1'
