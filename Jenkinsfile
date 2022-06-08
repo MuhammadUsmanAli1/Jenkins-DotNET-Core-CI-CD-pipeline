@@ -48,10 +48,10 @@ pipeline {
             }
         }
    
-            stage('Copy to s3') {
+           stage('Copy to s3') {
   Steps {
 bat 'echo "all good"'
-               archiveArtifacts 'test.zip'
+archiveArtifacts 'test.zip'
                     bat 'aws configure set region us-east-1'
                     bat 'aws s3 cp test.zip s3://smshandler'
   }          
