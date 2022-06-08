@@ -66,4 +66,4 @@ bat 'aws elasticbeanstalk update-environment --application-name %AWS_EB_APP_NAME
         }        
         
     }
-    }
+    
