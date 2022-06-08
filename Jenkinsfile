@@ -9,7 +9,6 @@ pipeline {
         AWS_EB_ENVIRONMENT = 'Smshandler-env'
         AWS_EB_APP_VERSION = "${BUILD_ID}"
     }
-
      triggers {
         githubPush()
       }
@@ -56,7 +55,6 @@ bat 'echo "all good"'
                     bat 'aws configure set region us-east-1'
                     bat 'aws s3 cp test.zip s3://smshandler'
   }          
-                
                 
                 stage('Create and Deploy New Version toBeanstalk') {
             steps {
