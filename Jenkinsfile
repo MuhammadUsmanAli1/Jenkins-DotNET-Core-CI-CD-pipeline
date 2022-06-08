@@ -55,7 +55,7 @@ bat 'echo "all good"'
                     bat 'aws configure set region us-east-1'
                     bat 'aws s3 cp test.zip s3://smshandler'
   }          
-                
+            }             
                 stage('Create and Deploy New Version toBeanstalk') {
             steps {
                   echo "working"
