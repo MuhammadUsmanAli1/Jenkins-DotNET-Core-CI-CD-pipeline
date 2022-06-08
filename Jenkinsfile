@@ -48,17 +48,17 @@ pipeline {
             }
         }
    
-      stage('Copy to s3') 
+        stage('Copy to s3'){
         Steps {
-                    bat 'echo "all good'
-                     archiveArtifacts 'test.zip'
-                    bat 'aws configure set region us-east-1'
-                    bat 'aws s3 cp test.zip s3://smshandler'
+            bat 'echo "all good'
+            archiveArtifacts 'test.zip'
+            bat 'aws configure set region us-east-1'
+            bat 'aws s3 cp test.zip s3://smshandler'
   }          
-            }             
+        }                     
                 stage('Create and Deploy New Version toBeanstalk') {
             steps {
-                  echo "working"
+                bat 'echo "working'
                 bat 'aws elasticbeanstalk create-application-version --application-name %AWS_EB_APP_NAME% --version-label %AWS_EB_APP_VERSION% --source-bundle S3Bucket=%AWS_S3_BUCKET%,S3Key=%ARTIFACT_NAME%'
 bat 'aws elasticbeanstalk update-environment --application-name %AWS_EB_APP_NAME% --environment-name %AWS_EB_ENVIRONMENT% --version-label %AWS_EB_APP_VERSION%'          }
       
