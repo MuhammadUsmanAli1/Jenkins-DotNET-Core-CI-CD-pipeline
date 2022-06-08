@@ -1,5 +1,15 @@
 pipeline {
     agent any
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+        ARTIFACT_NAME = 'test.zip'
+        AWS_S3_BUCKET = 'smshandler'
+        AWS_EB_APP_NAME = 'smshandler'
+        AWS_EB_ENVIRONMENT = 'Smshandler-env'
+        AWS_EB_APP_VERSION = "${BUILD_ID}"
+    }
+
      triggers {
         githubPush()
       }
@@ -41,14 +51,19 @@ pipeline {
    
             stage('Copy to s3') {
   Steps {
-  s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: '', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: 'test.zip', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'smshandler', userMetadata: []
-  
-        }
-          stage('Update to Beanstalk') {
+bat 'echo "all good"'
+               archiveArtifacts 'test.zip'
+                    bat 'aws configure set region us-east-1'
+                    bat 'aws s3 cp test.zip s3://smshandler'
+  }          
+                
+                
+                stage('Create and Deploy New Version toBeanstalk') {
             steps {
                   echo "working"
-                //bat  "echo Update to Beanstalk"
-                //bat 'aws elasticbeanstalk update-environment --application-name php --environment-name Php-env --version-label jenkins-pipeline-26'
+                bat 'aws elasticbeanstalk create-application-version --application-name %AWS_EB_APP_NAME% --version-label %AWS_EB_APP_VERSION% --source-bundle S3Bucket=%AWS_S3_BUCKET%,S3Key=%ARTIFACT_NAME%'
+bat 'aws elasticbeanstalk update-environment --application-name %AWS_EB_APP_NAME% --environment-name %AWS_EB_ENVIRONMENT% --version-label %AWS_EB_APP_VERSION%'          }
+      
             }
         }        
         
